@@ -17,9 +17,10 @@ if [ -z "$GITHUB_USER" ] || [ -z "$GITHUB_TOKEN" ]; then
   exit 1
 fi
 
-REMOTE_URL=$(git remote get-url origin)
-if [[ "$REMOTE_URL" != *"@"* ]]; then
-  TOKEN_URL="https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${REMOTE_URL#https://github.com/}"
-  git remote set-url origin "$TOKEN_URL"
-  echo "Updated remote URL to use token authentication."
-fi
+git config --global credential.helper store
+git credential approve <<EOF
+protocol=https
+host=github.com
+username=$GITHUB_USER
+password=$GITHUB_TOKEN
+EOF
