@@ -5,8 +5,8 @@ CREDS_FILE="$(dirname "$0")/.creds"
 if [ ! -f "$CREDS_FILE" ]; then
   echo "ERROR: .creds file not found at $CREDS_FILE"
   echo "Create it with two lines:"
-  echo "GITHUB_USER=yourusername"
-  echo "GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxx"
+  echo "GITHUB_USER=\"yourusername\""
+  echo "GITHUB_TOKEN=\"ghp_xxxxxxxxxxxxxxxxx\""
   exit 1
 fi
 
