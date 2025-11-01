@@ -14,16 +14,18 @@ export DISPLAY=:0
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 
-LOGFILE="$HOME/watchdog.log"
+[ -d "$HOME/watchdog_logs" ] || mkdir -p "$HOME/watchdog_logs"
+PROCESS_LOGFILE="$HOME/watchdog_logs/$PROCESS_NAME_$(date +'%Y-%m-%d_%H-%M-%S').log"
+WATCHDOG_LOGFILE="$HOME/watchdog_logs/watchdog.log"
 
 # --- Check if process with that name is already running ---
 if pgrep -x "$PROCESS_NAME" >/dev/null 2>&1; then
-  echo "$(date): Process '$PROCESS_NAME' already running, skipping start." >> "$LOGFILE"
+  echo "$(date): Process '$PROCESS_NAME' already running, skipping start." >> "$WATCHDOG_LOGFILE"
   exit 0
 fi
 
 # --- Start the process detached ---
-echo "$(date): Starting process '$PROCESS_NAME' -> $COMMAND" >> "$LOGFILE"
-nohup bash -c "$COMMAND"
+echo "$(date): Starting process '$PROCESS_NAME' -> $COMMAND" >> "$WATCHDOG_LOGFILE"
+nohup bash -c "$COMMAND" >> PROCESS_LOGFILE 2>&1
 PID=$!
-echo "$(date): Started '$PROCESS_NAME' with PID $PID" >> "$LOGFILE"
+echo "$(date): Started '$PROCESS_NAME' with PID $PID" >> "$WATCHDOG_LOGFILE"
