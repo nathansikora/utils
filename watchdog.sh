@@ -24,6 +24,6 @@ fi
 
 # --- Start the process detached ---
 echo "$(date): Starting process '$PROCESS_NAME' -> $COMMAND" >> "$LOGFILE"
-nohup bash -c "$COMMAND" >> "$LOGFILE" 2>&1 &
+nohup bash -c "$COMMAND"
 PID=$!
 echo "$(date): Started '$PROCESS_NAME' with PID $PID" >> "$LOGFILE"
