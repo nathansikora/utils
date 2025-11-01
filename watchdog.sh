@@ -1,5 +1,5 @@
 #!/bin/bash
-# Usage: ./run_with_display.sh "command_to_run" "process_name"
+# Usage: ./watchdog.sh "command_to_run" "process_name"
 
 COMMAND="$1"
 PROCESS_NAME="$2"
