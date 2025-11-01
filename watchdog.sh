@@ -26,6 +26,6 @@ fi
 
 # --- Start the process detached ---
 echo "$(date): Starting process '$PROCESS_NAME' -> $COMMAND" >> "$WATCHDOG_LOGFILE"
-nohup bash -c "$COMMAND" >> PROCESS_LOGFILE 2>&1
+nohup bash -c "$COMMAND" >> "$PROCESS_LOGFILE" 2>&1
 PID=$!
 echo "$(date): Started '$PROCESS_NAME' with PID $PID" >> "$WATCHDOG_LOGFILE"
