@@ -15,7 +15,7 @@ export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 
 [ -d "$HOME/watchdog_logs" ] || mkdir -p "$HOME/watchdog_logs"
-PROCESS_LOGFILE="$HOME/watchdog_logs/$PROCESS_NAME_$(date +'%Y-%m-%d_%H-%M-%S').log"
+PROCESS_LOGFILE="$HOME/watchdog_logs/${PROCESS_NAME}_$(date +'%Y-%m-%d_%H-%M-%S').log"
 WATCHDOG_LOGFILE="$HOME/watchdog_logs/watchdog.log"
 
 # --- Check if process with that name is already running ---
